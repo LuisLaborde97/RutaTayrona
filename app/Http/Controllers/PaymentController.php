@@ -32,9 +32,13 @@ class PaymentController extends Controller
         $reserva->id_cliente = $ultimo->id;
         $reserva->id_producto = $request->id;
         $reserva->recomendacion = $request->recomendacion;
-        $reserva->pasajeros = $request->personas2;
+        $reserva->pasajeros = $request->personas;
 
         $reserva->save();
+
+        $pago
+
+        
 
         return response($reserva);
     }

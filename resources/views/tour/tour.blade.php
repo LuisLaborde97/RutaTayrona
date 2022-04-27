@@ -148,48 +148,50 @@
   <div class="card-header"><h5 class="card-title">Completa la compra</h5></div>
   
   <div class="card-body">
-        
+    <form id="clientes2">
       <div class="row">
-        <form id="clientes2">
-            <div class="col-lg-10">
-              <div class="mb-3">
-                <select class="form-select" name="metodo" id="metodo">
-                  <option value="0"selected>Metodo de Pago</option>
-                  <option value="1">PayPal</option>
-                  <option value="2">Bancolombia</option>
-                  <option value="3">Bitcoin</option>
-                </select>
-              </div>
-            </div>
 
-            <div class="col-lg-2">
-              <div class="mt-1">
-                <i class="fa fa-credit-card" style="font-size:30px"></i>
-              </div>
+        
+          <div class="col-lg-10">
+            <div class="mb-3">
+              <select class="form-select" name="metodo" id="metodo">
+                <option value="0"selected>Metodo de Pago</option>
+                <option value="1">PayPal</option>
+                <option value="2">Bancolombia</option>
+                <option value="3">MercadoPago</option>
+                <option value="3">BitCoin</option>
+              </select>
             </div>
-
-            <div class="col-lg-10">
-              <div class="mb-3">
-                <input type="text" class="form-control" name="personas" id="personas" placeholder="Acompañantes">
-              </div>
-            </div>
-
-            <div class="col-lg-2">
-              <div class="mt-1">
-                <i class="fa fa-user-plus" style="font-size:30px"></i>
-              </div>
-            </div>
-
           </div>
 
-            <div class="mb-3">
-              <div class="badge bg-danger text-wrap" id="respuesta"></div>  
+          <div class="col-lg-2">
+            <div class="mt-1">
+              <i class="fa fa-credit-card" style="font-size:30px"></i>
             </div>
-            
+          </div>
 
+          <div class="col-lg-10">
+            <div class="mb-3">
+              <input type="text" class="form-control" name="personas" id="personas" placeholder="Acompañantes">
+            </div>
+          </div>
 
-            <button type="button" id="reserva" class="btn btn-outline-success" data-bs-toggle="modal" >Continuar</button>
-      </form>
+          <div class="col-lg-2">
+            <div class="mt-1">
+              <i class="fa fa-user-plus" style="font-size:30px"></i>
+            </div>
+          </div>
+      
+      </div>
+    </form>
+        <div class="mb-3">
+          <div class="badge bg-danger text-wrap" id="respuesta"></div>  
+        </div>
+        
+      
+
+        <button type="button" id="reserva" class="btn btn-outline-success" data-bs-toggle="modal" >Continuar</button>
+      
 
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -493,16 +495,17 @@
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
 
-          var form1 = $('#clientes').serialize();
+          var form1 = $('#clientes, #clientes2').serialize();
 
           $.ajax({
             type: "POST",
             url: "{{route('payment.completePayment')}}",
-            data: form1,
+            data: form1, 
             dataType: "json",
             headers: headers,
             success: function (response) {
               console.log(response);
+              console.log(form1);
             }
           });
           
