@@ -16,8 +16,7 @@ return new class extends Migration
         Schema::create('precios', function (Blueprint $table) {
             $table->id();
             $table->integer('id_producto');
-            $table->integer('id_fecha_precios');
-            $table->integer('id_adicionales');
+            $table->decimal('precio_base');
             $table->string('nombre');
             $table->text('descripcion');
             $table->timestamps();

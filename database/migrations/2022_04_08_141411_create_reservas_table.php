@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('reservas', function (Blueprint $table) {
             $table->id();
             $table->integer('id_producto');
-            $table->integer('id_compras');
+            $table->integer('id_producto');
+            $table->text('recomendacion');
             $table->timestamps();
         });
     }

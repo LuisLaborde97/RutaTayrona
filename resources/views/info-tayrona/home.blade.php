@@ -75,7 +75,7 @@
                     <div class="product-big-rating"><span class="icon material-icons-star"></span><span class="icon material-icons-star"></span><span class="icon material-icons-star"></span><span class="icon material-icons-star"></span><span class="icon material-icons-star_half"></span></div>
                   </div>
                   <p class="product-big-text">{{$i->descripcion}}</p><a class="button button-black-outline button-ujarak" href="{{route('tour',$i->id)}}">Compra Aquí</a>
-                  <div class="product-big-price-wrap"><span class="product-big-price">${{$i->precio}}</span></div>
+                  <div class="product-big-price-wrap"><span class="product-big-price">$ {{$i->precio_base}}</span></div>
                 </div>
               </div>
             </div>

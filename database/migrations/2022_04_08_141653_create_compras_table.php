@@ -15,8 +15,12 @@ return new class extends Migration
     {
         Schema::create('compras', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_cliente');
+            $table->integer('id_reserva');
+            $table->integer('id_adicional');
             $table->integer('id_producto');
-            $table->integer('id_precio');
+            $table->integer('id_pagos');
+            $table->decimal('precio_compra');
             $table->timestamps();
         });
     }

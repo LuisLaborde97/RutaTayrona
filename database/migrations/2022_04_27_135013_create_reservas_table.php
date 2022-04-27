@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('precios_adicionales', function (Blueprint $table) {
+        Schema::create('reservas', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_precio');
-            $table->integer('id_adicionales');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('precios_adicionales');
+        Schema::dropIfExists('reservas');
     }
 };

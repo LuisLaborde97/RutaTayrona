@@ -15,10 +15,7 @@ return new class extends Migration
     {
         Schema::create('pagos', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_reserva');
-            $table->integer('total');
             $table->string('tipo_de_pago');
-            $table->string('descripcion');
             $table->timestamps();
         });
     }

@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('compras_adicionales', function (Blueprint $table) {
+        Schema::create('pagos', function (Blueprint $table) {
             $table->id();
-            $table->integer('id_compras');
-            $table->integer('id_adicionales');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('compras_adicionales');
+        Schema::dropIfExists('pagos');
     }
 };

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\ToursController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ Route::controller(InfoController::class)->group(function(){
     Route::get('/','home')->name('home');
     Route::get('contactanos','contact')->name('contacto');
     Route::get('sobre-nosotros','sobre_nosotros')->name('sobre-nosotros');
+    Route::get('insertar', 'insertar')->name('insertar');
 
 });
 
@@ -31,9 +33,10 @@ Route::controller(ToursController::class)->group(function(){
     Route::get('tour/{id}', 'index')->name('tour');
 });
 
-Route::controller(ClienteController::class)->group(function(){
-    Route::post('tour/cliente', 'store')->name('cliente.store');
-});
+
+Route::post('tour/registro/cliente', [ClienteController::class,'store'])->name('cliente.store');
+
+Route::post('Payment/Proccess/paypal', [PaymentController::class, 'completePayment'])->name('payment.completePayment');
 
 
 

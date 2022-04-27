@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tours', function (Blueprint $table) {
+        Schema::create('productos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->text('descripcion');
             $table->text('presentacion');
-            $table->float('precio');
             $table->integer('duracion_dias')->default(0);
             $table->integer('duracion_horas')->default(0);
             $table->integer('duracion_min')->default(0);
@@ -27,8 +26,6 @@ return new class extends Migration
         });
     }
 
-   
-
     /**
      * Reverse the migrations.
      *
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tours');
+        Schema::dropIfExists('productos');
     }
 };

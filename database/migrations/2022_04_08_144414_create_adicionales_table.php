@@ -15,9 +15,10 @@ return new class extends Migration
     {
         Schema::create('adicionales', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_producto');
             $table->string('nombre');
             $table->text('descripcion');
-            $table->float('precio');
+            $table->decimal('precio');
             $table->timestamps();
         });
     }
