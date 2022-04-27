@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\cliente;
+use App\Models\Pago;
+use App\Models\Reserva;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
     public function completePayment(Request $request){
         $cliente = new cliente();
+        $reserva = new Reserva();
+        $pago = new Pago();
 
         $cliente->nombre = $request->nombre;
         $cliente->apellido = $request->apellido;
@@ -23,7 +27,19 @@ class PaymentController extends Controller
 
         $cliente->save();
 
+        $ultimo = cliente::all('id')->last();
 
-        return response($cliente);
+        $reserva->id_cliente = $ultimo->id;
+        $reserva->id_producto = $request->id;
+        $reserva->recomendacion = $request->recomendacion;
+        $reserva->pasajeros = $request->personas2;
+
+        $reserva->save();
+
+        return response($reserva);
+    }
+
+    public function postPayment(){
+        return view('compra');
     }
 }

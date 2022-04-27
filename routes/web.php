@@ -33,10 +33,14 @@ Route::controller(ToursController::class)->group(function(){
     Route::get('tour/{id}', 'index')->name('tour');
 });
 
+Route::controller(PaymentController::class)->group(function(){
+    Route::post('Payment/Proccess/paypal', 'completePayment')->name('payment.completePayment');
+    Route::get('compraFinalizada','postPayment')->name('payment.postPayment');
+});
 
-Route::post('tour/registro/cliente', [ClienteController::class,'store'])->name('cliente.store');
 
-Route::post('Payment/Proccess/paypal', [PaymentController::class, 'completePayment'])->name('payment.completePayment');
+
+
 
 
 

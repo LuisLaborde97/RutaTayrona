@@ -150,50 +150,46 @@
   <div class="card-body">
         
       <div class="row">
+        <form id="clientes2">
+            <div class="col-lg-10">
+              <div class="mb-3">
+                <select class="form-select" name="metodo" id="metodo">
+                  <option value="0"selected>Metodo de Pago</option>
+                  <option value="1">PayPal</option>
+                  <option value="2">Bancolombia</option>
+                  <option value="3">Bitcoin</option>
+                </select>
+              </div>
+            </div>
 
-        <div class="col-lg-10">
-          <div class="mb-3">
-            <select class="form-select" name="metodo" id="metodo">
-              <option value="0"selected>Metodo de Pago</option>
-              <option value="1">PayPal</option>
-              <option value="2">Bancolombia</option>
-              <option value="3">Bitcoin</option>
-            </select>
+            <div class="col-lg-2">
+              <div class="mt-1">
+                <i class="fa fa-credit-card" style="font-size:30px"></i>
+              </div>
+            </div>
+
+            <div class="col-lg-10">
+              <div class="mb-3">
+                <input type="text" class="form-control" name="personas" id="personas" placeholder="Acompañantes">
+              </div>
+            </div>
+
+            <div class="col-lg-2">
+              <div class="mt-1">
+                <i class="fa fa-user-plus" style="font-size:30px"></i>
+              </div>
+            </div>
+
           </div>
-        </div>
 
-        <div class="col-lg-2">
-          <div class="mt-1">
-            <i class="fa fa-credit-card" style="font-size:30px"></i>
-          </div>
-        </div>
-
-      
-
-      
-
-        <div class="col-lg-10">
-          <div class="mb-3">
-            <input type="text" class="form-control" name="personas" id="personas" placeholder="Acompañantes">
-          </div>
-        </div>
-
-        <div class="col-lg-2">
-          <div class="mt-1">
-            <i class="fa fa-user-plus" style="font-size:30px"></i>
-          </div>
-        </div>
-
-      </div>
-
-        <div class="mb-3">
-          <div class="badge bg-danger text-wrap" id="respuesta"></div>  
-        </div>
-        
+            <div class="mb-3">
+              <div class="badge bg-danger text-wrap" id="respuesta"></div>  
+            </div>
+            
 
 
-        <button type="button" id="reserva" class="btn btn-outline-success" data-bs-toggle="modal" >Continuar</button>
-      
+            <button type="button" id="reserva" class="btn btn-outline-success" data-bs-toggle="modal" >Continuar</button>
+      </form>
 
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -207,9 +203,9 @@
                  <div class="card-header"><h5 class="card-title">Completa la compra</h5></div>
                    <div class="card-body">
 
-                        <form id="clientes" name="clientes">
+                      <form id="clientes" name="clientes">
                         @csrf
-                        
+                        <input type="hidden" name="id" value="{{$tour[0]->id}}">
                         <div class="row">
 
                         <div class="col-lg-4">
@@ -333,7 +329,7 @@
                                 <i class="fa fa-user-plus" style="font-size:20px"></i>
                               </div>
                             </div>
-                            
+
                           </div>
 
                           <div class="col-lg-12">
@@ -365,7 +361,7 @@
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="total"> Total a pagar: {{number_format(($tour[0]->precio_base * 0.000264953)*0.3, 2)}}</h5>
+                      <h5 class="modal-title text-center text-muted" id="total"> Total a pagar: {{number_format(($tour[0]->precio_base * 0.000264953)*0.3, 2)}}</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -457,14 +453,18 @@
       }
 
       if (cantPersonas == "") {
-        $('#respuesta').html("Debe ingresar cuantos compañeros viajaran con usted");
-        return false;
-        $('#personas').focus();
+        $('#personas2').val('0');
       }
 
       $('#personas2').val(cantPersonas);
+      
+
+      var cantPersonas2 = $('#presonas2').val();
 
       $("#staticBackdrop").modal('show');
+
+      console.log(cantPersonas2);
+      
 
       if (metodo == "1") {
        $('#metodopago').html('<div id="paypal-button-container"></div>');
