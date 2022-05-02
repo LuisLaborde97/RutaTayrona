@@ -4,19 +4,68 @@
 
 @section('content')
     <br>
-    <div class="card text-dark bg-light mb-3 mt-5">
-        <div class="card-header">
-            <h1 class="card-title">
-                Gracias por su compra!
-            </h1>
-        </div>
+    <div class="card mt-5">        
         <div class="card-body">
-            <i class="fa fa-check-circle-o" style="font-size:100px;color:green"></i>
+            <h3 class="card-title text-muted text-center">Recibo de pago</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Codigo de factura:</td>
+                        <td>#{{$recibo[0]->recibo_compra}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nombre:</td>
+                        <td>{{$recibo[0]->nombre}}</td>
+                        
+                    </tr>
+                    <tr>
+                        <td>Apellido:</td>
+                        <td>{{$recibo[0]->apellido}}</td>
+                    </tr>
+                    <tr>
+                        <td>Tour adquirido: </td>
+                        <td>{{$recibo[0]->producto}}</td>
+                    </tr>
+                    <tr>
+                        <td>Cantidad de pasajeros: </td>
+                        <td>{{$recibo[0]->pasajeros}}</td>
+                    </tr>
+                    <tr>
+                        <td>Tipo de pago: </td>
+                        <td>{{$recibo[0]->tipo_pago}}</td>
+                    </tr>
 
-            <p class="card-text fs-1 fw-bolder lh-base">Gracias por su compra!! En unos instantes se le enviara un correo con su recibo (Recuerde que el 70% restante de la compra, tendrá que ser pagada en las oficinas de Ruta Tayrona)</p>
+                    <tr>
+                        <td>Precio del Tour: </td>
+                        <td>{{number_format(($recibo[0]->precio_base*0.000264953)*0.3,2)}}</td>
+                    </tr>
+                    @foreach ($adicional as $item)
+                    <tr>
+                        <td>Adicionales: </td>
+                        <td>{{$item->nombre}} ({{number_format($item->precio*0.000264953,2)}})</td>
+                    </tr>    
+                    @endforeach
+                    <tr>
+                        <td>Fecha de salida: </td>
+                        <td>{{$nueva_fecha}}</td>
+                    </tr>
+
+
+                     
+                    
+                    <tr>
+                        <td>Total pagado (30%)</td>
+                        <td>{{$recibo[0]->total_compra}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
     </div>
-
 
 @endsection

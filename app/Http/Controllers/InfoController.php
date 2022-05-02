@@ -29,9 +29,5 @@ class InfoController extends Controller
         return view('info-tayrona.about');
     }
 
-    public function insertar(){
-        return view('welcome');
-    }
-
     
 }

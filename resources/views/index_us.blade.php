@@ -45,7 +45,7 @@
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
-          <a class="navbar-brand" href="{{route('home')}}"><img src="{{asset('images/tours/logos/logo.ico')}}" width="45" height="45" alt=""> Ruta Tayrona</a>
+          <a class="navbar-brand" href="{{route('homeUS')}}"><img src="{{asset('images/tours/logos/logo.ico')}}" width="45" height="45" alt=""> Ruta Tayrona</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -54,7 +54,7 @@
               <li class="nav-item active">
                 <div class="dropdown">
                   <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    Lenguaje
+                    Lenguage
                   </a>
                 
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -64,13 +64,13 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{route('home')}}">Inicio</a>
+                <a class="nav-link" href="{{route('homeUS')}}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{route('sobre-nosotros')}}">Sobre Nosotros</a>
+                <a class="nav-link" href="{{route('sobre-nosotrosUS')}}">About Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{route('contacto')}}">Contactanos</a>
+                <a class="nav-link" href="{{route('contactoUS')}}">Contact Us</a>
               </li>
             </ul>
           </div>
@@ -116,10 +116,10 @@
               <div class="col-sm-11 col-md-7 col-lg-5 col-xl-4">
                 <div class="oh-desktop">
                   <div class="wow slideInLeft" data-wow-delay="0s">
-                    <h6 class="text-spacing-100 text-uppercase">Acceso Directo</h6>
+                    <h6 class="text-spacing-100 text-uppercase">Shortcuts</h6>
                     <ul class="row-6 list-0 list-marked list-marked-md list-marked-secondary list-custom-2">
-                      <li><a href="{{route('sobre-nosotros')}}">Sobre Nosotros</a></li>
-                      <li><a href="#">Nuestros Tours</a></li>
+                      <li><a href="{{route('sobre-nosotros')}}">About Us</a></li>
+                      <li><a href="#">Our Tours</a></li>
                     </ul>
                     
                   </div>

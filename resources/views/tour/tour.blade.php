@@ -159,7 +159,7 @@
                 <option value="1">PayPal</option>
                 <option value="2">Bancolombia</option>
                 <option value="3">MercadoPago</option>
-                <option value="3">BitCoin</option>
+                <option value="4">BitCoin</option>
               </select>
             </div>
           </div>
@@ -303,12 +303,15 @@
                           <div class="mb-3">
                             @foreach ($adicionales as $item)
                             <div class="form-check">
-                              <input class="form-check-input" type="checkbox" value="{{$item->precio*0.000264953}}" id="checkAdicional" name="check" ">
+                              <input class="form-check-input" type="checkbox" value="{{number_format($item->precio*0.000264953,2)}}" id="checkAdicional" name="check" ">
+                              <input class="form-check-input" type="checkbox" value="{{$item->id}}" id="checkAdicional2" name="check2[]" style="opacity:0; position:absolute; left:9999px;">
+                              
                               <label class="form-check-label pull-left" for="flexCheckDefault">
                                 {{$item->nombre}} ({{number_format($item->precio*0.000264953, 2)}})
                               </label>
                             </div>
                             @endforeach
+                            <input type="hidden" name="item" id ="item" value="">
                           </div>
                           
                           <div class="row">
@@ -338,8 +341,9 @@
                             <div class="mb-3">
                              <h4>Precio: <span id="precio">{{number_format(($tour[0]->precio_base * 0.000264953)*0.3, 2)}}</span> </h4>
                             </div>
-                            <input type="hidden" id="precio_input" value="">
                           </div>
+
+                          <input type="hidden" id="precio_input" name="precio_input" value="">
 
                           <div class="mb-3">
                             <div class="badge bg-danger text-wrap" id="respuesta2"></div>  
@@ -382,25 +386,20 @@
         </div>
       </div>
     </div>
-</div>
-
-<div>
-  <form id="paypal">
-    <input type="hidden" name="detalles" value="">
-  </form>
-</div>
+  </div>
         
 
 
 <script>
   $(document).ready(function (e) {
 
-
-
     var checks = document.querySelectorAll('#checkAdicional');
+    var checks2 = document.querySelectorAll('#checkAdicional2');
     var precio = $('#precio').text();
+    var item = $('#item').val();
+    $('#precio_input').val(precio);
 
-
+    var item = 0;
   
     for(let i = 0; i < checks.length; i++){
 
@@ -410,8 +409,6 @@
 
           var suma = parseFloat(checks[i].value) + parseFloat(precio);
 
-          
-
           precio = suma.toFixed(2);
 
           $('#precio').html(precio);
@@ -419,25 +416,41 @@
           $('#precio_input').val(precio);
 
           $('#total').html('Total a pagar: '+precio);
-          
+
+          item += 1;
+
+          checks2[i].click();
+
+          console.log(checks2[i].value);
 
         }else{
+
           var suma = parseFloat(precio) - parseFloat(checks[i].value);
           
           precio = suma.toFixed(2);
 
           $('#precio').html(precio);
+
           $('#precio_input').val(precio);
+
           $('#total').html('Total a pagar: '+precio+' USD');
 
-          
+          item -= 1;
+
+          checks2[i].click();
+
+          console.log(checks2[i].value);
+
         }
+
+        console.log(item);
+
+        $('#item').val(item);
         
 
       })
         
     }
-
     
     
 
@@ -465,13 +478,11 @@
 
       $("#staticBackdrop").modal('show');
 
-      console.log(cantPersonas2);
       
 
-      if (metodo == "1") {
-       $('#metodopago').html('<div id="paypal-button-container"></div>');
 
-      }
+      if (metodo == '1') {
+       $('#metodopago').html('<div id="paypal-button-container"></div>');
 
        paypal.Buttons({
       style:{
@@ -503,24 +514,25 @@
             data: form1, 
             dataType: "json",
             headers: headers,
-            success: function (response) {
-              console.log(response);
-              console.log(form1);
-            }
-          });
-          
+          })
+          .done(function(response){
+            console.log(response);
+            $(location).attr('href',"http://127.0.0.1:8000/compraFinalizada/"+response);
+          })
+          .fail(function(jqXHR, textStatus, errorThrow){
 
-        });
+            console.error(textStatus, errorThrow);
+
+          });
+      });
       },
       onCancel: function(data){
         console.log(data);
-
       }
     }).render('#paypal-button-container');
-      
-
-
-
+  }else{
+    $('#metodopago').html('<h1>No esta completo es metodo de pago</h1>')
+  }
     });
 
 

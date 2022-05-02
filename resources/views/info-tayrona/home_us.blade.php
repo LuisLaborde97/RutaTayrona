@@ -1,4 +1,4 @@
-@extends('index')
+@extends('index_us')
 
 @section('title', 'Ruta Tayrona')
 
@@ -17,7 +17,7 @@
           <div class="row">
             <div class="col-md-10">
               <h4 class="text-uppercase" data-caption-animate="fadeInRight" data-caption-delay="0">{{$i->nombre}}</h3>
-              <h3 class="oh font-weight-light" data-caption-animate="slideInUp" data-caption-delay="100"><span class="font-weight-bold">{{$i->presentacion}}</span></h2><a class="button button-default-outline button-ujarak" href="{{route('tour',$i->id)}}" data-caption-animate="fadeInLeft" data-caption-delay="0">Reserva Aqui</a>
+              <h3 class="oh font-weight-light" data-caption-animate="slideInUp" data-caption-delay="100"><span class="font-weight-bold">{{$i->presentacion}}</span></h2><a class="button button-default-outline button-ujarak" href="{{route('tour',$i->id)}}" data-caption-animate="fadeInLeft" data-caption-delay="0">Book Here</a>
             </div>
           </div>
         </div>
@@ -51,14 +51,14 @@
       
       <!-- Owl Carousel-->
     </div>
-  </div><a class="link-classic wow fadeInUp" href="{{route('Tours')}}">OTRAS EXPERIENCIAS<span></span></a>
+  </div><a class="link-classic wow fadeInUp" href="{{route('Tours')}}">Other Experiences<span></span></a>
   </section>
   
   
   <!-- Hot tours-->
   <section class="section section-sm bg-default">
     <div class="container">
-      <h3 class="oh-desktop"><span class="d-inline-block wow slideInDown">Tours Populares</span></h3>
+      <h3 class="oh-desktop"><span class="d-inline-block wow slideInDown">Hot Tours</span></h3>
       <div class="row row-sm row-40 row-md-50">
         @foreach ($tours2 as $i)
             
@@ -67,15 +67,15 @@
           <!-- Product Big-->
           <article class="product-big">
             <div class="unit flex-column flex-md-row align-items-md-stretch">
-              <div class="unit-left"><a class="product-big-figure" href="{{route('tour',$i->id)}}"><img src="{{$i->url}}" alt="" width="600" height="366"/></a></div>
+              <div class="unit-left"><a class="product-big-figure" href="#"><img src="{{$i->url}}" alt="" width="600" height="366"/></a></div>
               <div class="unit-body">
                 <div class="product-big-body">
-                  <h5 class="product-big-title"><a href="{{route('tour',$i->id)}}">{{$i->nombre}}, Colombia</a></h5>
+                  <h5 class="product-big-title"><a href="#">{{$i->nombre}}, Colombia</a></h5>
                   <div class="group-sm group-middle justify-content-start">
                     <div class="product-big-rating"><span class="icon material-icons-star"></span><span class="icon material-icons-star"></span><span class="icon material-icons-star"></span><span class="icon material-icons-star"></span><span class="icon material-icons-star_half"></span></div>
                   </div>
-                  <p class="product-big-text">{{$i->descripcion}}</p><a class="button button-black-outline button-ujarak" href="{{route('tour',$i->id)}}">Compra Aquí</a>
-                  <div class="product-big-price-wrap"><span class="product-big-price">{{number_format($i->precio_base*0.3)}} COP</span></div>
+                  <p class="product-big-text">{{$i->descripcion}}</p><a class="button button-black-outline button-ujarak" href="{{route('tour',$i->id)}}">Book Here</a>
+                  <div class="product-big-price-wrap"><span class="product-big-price">$ {{number_format($i->precio_base*0.3, 2)}}</span></div>
                 </div>
               </div>
             </div>
@@ -90,7 +90,7 @@
   <!-- Different People-->
   <section class="section section-sm">
     <div class="container">
-      <h3 class="title-block find-car oh"><span class="d-inline-block wow slideInUp">Soporte</span></h3>
+      <h3 class="title-block find-car oh"><span class="d-inline-block wow slideInUp">Support</span></h3>
       <div class="row row-30 justify-content-center box-ordered">
         <div class="col-sm-6 col-md-5 col-lg-3">
           <!-- Team Modern-->
@@ -104,7 +104,7 @@
             </div>
             <div class="team-modern-caption">
               <h6 class="team-modern-name"><a href="#">Ruta Tayrona</a></h6>
-              <p class="team-modern-status">Asesor</p>
+              <p class="team-modern-status">Advisor</p>
               <h6 class="team-modern-phone"><a href="https://wa.me/573145502928?text=Me%20interesa%20conocer%20sobre%20un%20tour" target="_blank">+57 (314)5502928</a></h6>
             </div>
           </article>
@@ -114,19 +114,5 @@
     </div>
 
   </section>
-
-  <script>
-      
-    $(document).ready(function (event) {
-      
-
-    var idioma = $('html')[0].lang;
-
-    console.log(idioma);
-  
-
-    });
-
-  </script>
 
   @endsection

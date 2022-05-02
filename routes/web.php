@@ -4,7 +4,9 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InfoController;
+use App\Http\Controllers\InfoControllerUS;
 use App\Http\Controllers\ToursController;
+use App\Http\Controllers\ToursControllerUS;
 use App\Http\Controllers\PaymentController;
 
 /*
@@ -23,7 +25,14 @@ Route::controller(InfoController::class)->group(function(){
     Route::get('/','home')->name('home');
     Route::get('contactanos','contact')->name('contacto');
     Route::get('sobre-nosotros','sobre_nosotros')->name('sobre-nosotros');
-    Route::get('insertar', 'insertar')->name('insertar');
+
+});
+
+Route::controller(InfoControllerUS::class)->group(function(){
+
+    Route::get('en','homeUS')->name('homeUS');
+    Route::get('contactanos/en','contactUS')->name('contactoUS');
+    Route::get('sobre-nosotros/en','sobre_nosotrosUS')->name('sobre-nosotrosUS');
 
 });
 
@@ -33,14 +42,15 @@ Route::controller(ToursController::class)->group(function(){
     Route::get('tour/{id}', 'index')->name('tour');
 });
 
-Route::controller(PaymentController::class)->group(function(){
-    Route::post('Payment/Proccess/paypal', 'completePayment')->name('payment.completePayment');
-    Route::get('compraFinalizada','postPayment')->name('payment.postPayment');
+
+Route::controller(ToursControllerUS::class)->group(function(){
+
+    Route::get('en/tours','show_us')->name('Tours_us');
+    Route::get('en/tour/{id}', 'index_us')->name('tour_us');
 });
 
-
-
-
-
-
+Route::controller(PaymentController::class)->group(function(){
+    Route::post('Payment/Proccess/paypal', 'completePayment')->name('payment.completePayment');
+    Route::get('compraFinalizada/{codigoCompra}','postPayment')->name('payment.postPayment');
+});
 
