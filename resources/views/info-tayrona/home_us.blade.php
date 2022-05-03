@@ -17,7 +17,7 @@
           <div class="row">
             <div class="col-md-10">
               <h4 class="text-uppercase" data-caption-animate="fadeInRight" data-caption-delay="0">{{$i->nombre}}</h3>
-              <h3 class="oh font-weight-light" data-caption-animate="slideInUp" data-caption-delay="100"><span class="font-weight-bold">{{$i->presentacion}}</span></h2><a class="button button-default-outline button-ujarak" href="{{route('tour',$i->id)}}" data-caption-animate="fadeInLeft" data-caption-delay="0">Book Here</a>
+              <h3 class="oh font-weight-light" data-caption-animate="slideInUp" data-caption-delay="100"><span class="font-weight-bold">{{$i->presentacion}}</span></h2><a class="button button-default-outline button-ujarak" href="{{route('tourUS',$i->id)}}" data-caption-animate="fadeInLeft" data-caption-delay="0">Book Here</a>
             </div>
           </div>
         </div>
@@ -40,7 +40,7 @@
                 
             <div class="col-md-4 wow fadeInDown col-9" data-wow-delay=".2s">
               <ul class="list-marked-2 box-categories-list">
-                <li><a href="{{route('tour',$item->id)}}"><img src="{{$item->url}}" alt="" width="368" height="420"/></a>
+                <li><a href="{{route('tourUS',$item->id)}}"><img src="{{$item->url}}" alt="" width="368" height="420"/></a>
                   <h5 class="box-categories-title">{{$item->nombre}}</h5>
                 </li>
               </ul>
@@ -51,7 +51,7 @@
       
       <!-- Owl Carousel-->
     </div>
-  </div><a class="link-classic wow fadeInUp" href="{{route('Tours')}}">Other Experiences<span></span></a>
+  </div><a class="link-classic wow fadeInUp" href="{{route('ToursUS')}}">Other Experiences<span></span></a>
   </section>
   
   
@@ -67,14 +67,14 @@
           <!-- Product Big-->
           <article class="product-big">
             <div class="unit flex-column flex-md-row align-items-md-stretch">
-              <div class="unit-left"><a class="product-big-figure" href="#"><img src="{{$i->url}}" alt="" width="600" height="366"/></a></div>
+              <div class="unit-left"><a class="product-big-figure" href="{{route('tourUS',$i->id)}}"><img src="{{$i->url}}" alt="" width="600" height="366"/></a></div>
               <div class="unit-body">
                 <div class="product-big-body">
-                  <h5 class="product-big-title"><a href="#">{{$i->nombre}}, Colombia</a></h5>
+                  <h5 class="product-big-title"><a href="{{route('tourUS',$i->id)}}">{{$i->nombre}}, Colombia</a></h5>
                   <div class="group-sm group-middle justify-content-start">
                     <div class="product-big-rating"><span class="icon material-icons-star"></span><span class="icon material-icons-star"></span><span class="icon material-icons-star"></span><span class="icon material-icons-star"></span><span class="icon material-icons-star_half"></span></div>
                   </div>
-                  <p class="product-big-text">{{$i->descripcion}}</p><a class="button button-black-outline button-ujarak" href="{{route('tour',$i->id)}}">Book Here</a>
+                  <p class="product-big-text">{{$i->descripcion}}</p><a class="button button-black-outline button-ujarak" href="{{route('tourUS',$i->id)}}">Book Here</a>
                   <div class="product-big-price-wrap"><span class="product-big-price">$ {{number_format($i->precio_base*0.3, 2)}}</span></div>
                 </div>
               </div>

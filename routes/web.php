@@ -1,13 +1,11 @@
 <?php
 
-use App\Http\Controllers\ClienteController;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\InfoControllerUS;
 use App\Http\Controllers\ToursController;
-use App\Http\Controllers\ToursControllerUS;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ToursControllerUS;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,12 +40,14 @@ Route::controller(ToursController::class)->group(function(){
     Route::get('tour/{id}', 'index')->name('tour');
 });
 
-
 Route::controller(ToursControllerUS::class)->group(function(){
 
-    Route::get('en/tours','show_us')->name('Tours_us');
-    Route::get('en/tour/{id}', 'index_us')->name('tour_us');
+    Route::get('en/tours','show_us')->name('ToursUS');
+    Route::get('en/tour/{id}', 'index_us')->name('tourUS');
 });
+
+
+
 
 Route::controller(PaymentController::class)->group(function(){
     Route::post('Payment/Proccess/paypal', 'completePayment')->name('payment.completePayment');
