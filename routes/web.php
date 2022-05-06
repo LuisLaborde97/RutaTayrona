@@ -52,5 +52,6 @@ Route::controller(ToursControllerUS::class)->group(function(){
 Route::controller(PaymentController::class)->group(function(){
     Route::post('Payment/Proccess/paypal', 'completePayment')->name('payment.completePayment');
     Route::get('compraFinalizada/{codigoCompra}','postPayment')->name('payment.postPayment');
+    Route::get('purchaseCompleted/{codigoCompra}','postPayment')->name('payment.postPayment');
 });
 

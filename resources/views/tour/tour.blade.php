@@ -391,88 +391,45 @@
 
 
 <script>
-  $(document).ready(function (e) {
-
+  $(document).ready(function (e) {  
+    
     var checks = document.querySelectorAll('#checkAdicional');
     var checks2 = document.querySelectorAll('#checkAdicional2');
     var precio = $('#precio').text();
+    var precio_total = 0;
+
+    
+    
     var item = $('#item').val();
     $('#precio_input').val(precio);
-
+    
     var item = 0;
-  
-    for(let i = 0; i < checks.length; i++){
-
-      checks[i].addEventListener('click', function(){
-
-        if(checks[i].checked){
-
-          var suma = parseFloat(checks[i].value) + parseFloat(precio);
-
-          precio = suma.toFixed(2);
-
-          $('#precio').html(precio);
-
-          $('#precio_input').val(precio);
-
-          $('#total').html('Total a pagar: '+precio);
-
-          item += 1;
-
-          checks2[i].click();
-
-          console.log(checks2[i].value);
-
-        }else{
-
-          var suma = parseFloat(precio) - parseFloat(checks[i].value);
-          
-          precio = suma.toFixed(2);
-
-          $('#precio').html(precio);
-
-          $('#precio_input').val(precio);
-
-          $('#total').html('Total a pagar: '+precio+' USD');
-
-          item -= 1;
-
-          checks2[i].click();
-
-          console.log(checks2[i].value);
-
-        }
-
-        console.log(item);
-
-        $('#item').val(item);
-        
-
-      })
-        
-    }
-    
-    
 
     $('#reserva').click(function(event) {
       event.preventDefault();
 
+
       var metodo = $('#metodo').val();
       var cantPersonas = $('#personas').val();
-      
+         
 
       if (metodo == "0") {
-        $('#respuesta').html("Debe ingresar el metodo de pago");
+        $('#respuesta').html("You must enter the payment method");
         return false;
         $('#metodo').focus();
       }
 
       if (cantPersonas == "") {
         $('#personas2').val('0');
+        precio_total = precio;
+        console.log(precio_total);
+      }else{
+        $('#personas2').val(cantPersonas);
+        precio_total = precio*cantPersonas
+        $('#precio_input').val(precio_total);
+        $('#precio').html(precio_total);
+        console.log(precio_total);
       }
-
-      $('#personas2').val(cantPersonas);
-      
 
       var cantPersonas2 = $('#presonas2').val();
 
@@ -494,7 +451,7 @@
         return actions.order.create({
           purchase_units: [{
             amount: {
-              value: precio
+              value: precio_total
             }
           }]
         });
@@ -516,8 +473,7 @@
             headers: headers,
           })
           .done(function(response){
-            console.log(response);
-            $(location).attr('href',"http://127.0.0.1:8000/compraFinalizada/"+response);
+            $(location).attr('href',"http://127.0.0.1:8000/compraFinalizada/"+response.recibo_compra);
           })
           .fail(function(jqXHR, textStatus, errorThrow){
 
@@ -531,7 +487,7 @@
       }
     }).render('#paypal-button-container');
   }else{
-    $('#metodopago').html('<h1>No esta completo es metodo de pago</h1>')
+    $('#metodopago').html('<h1>This payment method is not complete</h1>')
   }
     });
 
@@ -555,61 +511,61 @@
       var fecha = $('#date1').val();
 
       if (nombre == "") {
-        $('#respuesta2').html("Debe ingresar su nombre por favor.");
+        $('#respuesta2').html("Please enter your First Name.");
         $('#nombre').focus();
         return false;
       }
 
       if (apellido == "") {
-        $('#respuesta2').html("Debe ingresar su apellido por favor.");
+        $('#respuesta2').html("Please enter your Last Name.");
         $('#apellido').focus();
         return false;
       }
 
       if (edad == "") {
-        $('#respuesta2').html("Debe ingresar su edad por favor.");
+        $('#respuesta2').html("Please enter your age.");
         $('#edad').focus();
         return false;
       }
 
       if (correo == "") {
-        $('#respuesta2').html("Debe ingresar su correo por favor.");
+        $('#respuesta2').html("Please enter your email.");
         $('#correo').focus();
         return false;
       }
 
       if (sexo == "") {
-        $('#respuesta2').html("Debe ingresar su sexo por favor.");
+        $('#respuesta2').html("Please enter your gender.");
         $('#sexo').focus();
         return false;
       }
 
       if (indicativo == "") {
-        $('#respuesta2').html("Debe ingresar su indicativo por favor.");
+        $('#respuesta2').html("Please enter your callsign.");
         $('#indicativo').focus();
         return false;
       }
 
       if( telefono == "") {
-        $('#respuesta2').html("Debe ingresar su telefono por favor.");
+        $('#respuesta2').html("Please enter your phone number.");
         $('#telefono').focus();
         return false;
       }
 
       if (pais == "") {
-        $('#respuesta2').html("Debe ingresar su pais por favor.");
+        $('#respuesta2').html("Please enter your country.");
         $('#pais').focus();
         return false;
       }
 
       if (identificacion == "") {
-        $('#respuesta2').html("Debe ingresar su identificacion por favor.");
+        $('#respuesta2').html("Please enter your ID type.");
         $('#identificacion').focus();
         return false;
       }
 
       if (num_identificacion == "") {
-        $('#respuesta2').html("Debe ingresar su numero de identificacion por favor.");
+        $('#respuesta2').html("You must enter your ID number please..");
         $('#num_identificacion').focus();
         return false;
       }
@@ -621,7 +577,7 @@
       }
 
       if (fecha == "") {
-        $('#respuesta2').html("Debe ingresar la fecha de salida por favor.");
+        $('#respuesta2').html("You must enter the place of departure please.");
         $('#date1').focus();
         return false;
       }
@@ -630,6 +586,63 @@
       $('#staticBackdrop').modal('hide');
 
     });
+
+    
+    
+  
+    for(let i = 0; i < checks.length; i++){
+
+      checks[i].addEventListener('click', function(){
+
+        if(checks[i].checked){
+
+          var suma = parseFloat(checks[i].value) + parseFloat(precio_total);
+
+          precio_total = suma.toFixed(2);
+
+          $('#precio').html(precio_total);
+
+          $('#precio_input').val(precio_total);
+
+          $('#total').html('Total a pagar: '+precio_total);
+
+          item += 1;
+
+          checks2[i].click();
+
+          
+          
+
+        }else{
+
+          var suma = parseFloat(precio_total) - parseFloat(checks[i].value);
+          
+          precio_total = suma.toFixed(2);
+
+          $('#precio').html(precio_total);
+
+          $('#precio_input').val(precio_total);
+
+          $('#total').html('Total a pagar: '+precio_total+' USD');
+
+          item -= 1;
+
+          checks2[i].click();
+
+          
+
+
+        }
+
+
+
+        $('#item').val(item);
+        
+
+      })
+        
+    }
+    
 
   });
 </script>

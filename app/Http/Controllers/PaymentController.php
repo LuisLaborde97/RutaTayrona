@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Adicionales;
 use App\Models\cliente;
 use App\Models\Compra;
 use App\Models\ComprasAdicionales;
-use App\Models\Pago;
 use App\Models\Reserva;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -75,7 +73,7 @@ class PaymentController extends Controller
         
 
 
-        return($codigo_compra);
+        return json_encode($compra);
     }
 
     public function postPayment($codigo){

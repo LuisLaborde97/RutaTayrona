@@ -391,72 +391,19 @@
 
 
 <script>
-  $(document).ready(function (e) {
-
+  $(document).ready(function (e) {  
+    
     var checks = document.querySelectorAll('#checkAdicional');
     var checks2 = document.querySelectorAll('#checkAdicional2');
     var precio = $('#precio').text();
+    var precio_total = 0;
+
+    
     
     var item = $('#item').val();
     $('#precio_input').val(precio);
-
     
-    
-
     var item = 0;
-  
-    for(let i = 0; i < checks.length; i++){
-
-      checks[i].addEventListener('click', function(){
-
-        if(checks[i].checked){
-
-          var suma = parseFloat(checks[i].value) + parseFloat(precio);
-
-          precio = suma.toFixed(2);
-
-          $('#precio').html(precio);
-
-          $('#precio_input').val(precio);
-
-          $('#total').html('Total a pagar: '+precio);
-
-          item += 1;
-
-          checks2[i].click();
-
-          console.log(checks2[i].value);
-
-        }else{
-
-          var suma = parseFloat(precio) - parseFloat(checks[i].value);
-          
-          precio = suma.toFixed(2);
-
-          $('#precio').html(precio);
-
-          $('#precio_input').val(precio);
-
-          $('#total').html('Total a pagar: '+precio+' USD');
-
-          item -= 1;
-
-          checks2[i].click();
-
-          console.log(checks2[i].value);
-
-        }
-
-        console.log(item);
-
-        $('#item').val(item);
-        
-
-      })
-        
-    }
-    
-    
 
     $('#reserva').click(function(event) {
       event.preventDefault();
@@ -464,7 +411,7 @@
 
       var metodo = $('#metodo').val();
       var cantPersonas = $('#personas').val();
-      
+         
 
       if (metodo == "0") {
         $('#respuesta').html("You must enter the payment method");
@@ -474,10 +421,15 @@
 
       if (cantPersonas == "") {
         $('#personas2').val('0');
+        precio_total = precio;
+        console.log(precio_total);
+      }else{
+        $('#personas2').val(cantPersonas);
+        precio_total = precio*cantPersonas
+        $('#precio_input').val(precio_total);
+        $('#precio').html(precio_total);
+        console.log(precio_total);
       }
-
-      $('#personas2').val(cantPersonas);
-      
 
       var cantPersonas2 = $('#presonas2').val();
 
@@ -499,7 +451,7 @@
         return actions.order.create({
           purchase_units: [{
             amount: {
-              value: precio
+              value: precio_total
             }
           }]
         });
@@ -521,8 +473,7 @@
             headers: headers,
           })
           .done(function(response){
-            console.log(response);
-            $(location).attr('href',"http://127.0.0.1:8000/compraFinalizada/"+response);
+            $(location).attr('href',"http://127.0.0.1:8000/purchaseCompleted/"+response.recibo_compra);
           })
           .fail(function(jqXHR, textStatus, errorThrow){
 
@@ -635,6 +586,63 @@
       $('#staticBackdrop').modal('hide');
 
     });
+
+    
+    
+  
+    for(let i = 0; i < checks.length; i++){
+
+      checks[i].addEventListener('click', function(){
+
+        if(checks[i].checked){
+
+          var suma = parseFloat(checks[i].value) + parseFloat(precio_total);
+
+          precio_total = suma.toFixed(2);
+
+          $('#precio').html(precio_total);
+
+          $('#precio_input').val(precio_total);
+
+          $('#total').html('Total a pagar: '+precio_total);
+
+          item += 1;
+
+          checks2[i].click();
+
+          
+          
+
+        }else{
+
+          var suma = parseFloat(precio_total) - parseFloat(checks[i].value);
+          
+          precio_total = suma.toFixed(2);
+
+          $('#precio').html(precio_total);
+
+          $('#precio_input').val(precio_total);
+
+          $('#total').html('Total a pagar: '+precio_total+' USD');
+
+          item -= 1;
+
+          checks2[i].click();
+
+          
+
+
+        }
+
+
+
+        $('#item').val(item);
+        
+
+      })
+        
+    }
+    
 
   });
 </script>
